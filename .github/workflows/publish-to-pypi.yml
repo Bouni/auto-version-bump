@@ -16,7 +16,7 @@ jobs:
         run: |
           # from refs/tags/v1.2.3 get 1.2.3
           echo $GITHUB_REF
-          VERSION=$(echo $GITHUB_REF | sed 's#.*/v##')
+          VERSION=$(echo $GITHUB_REF | sed 's#.*/##')
           echo "s/version=.*/version=\"${VERSION}\",/g"
           sed -i "s#version=.*#version=\"${VERSION}\",#" "setup.py"
           cat setup.py
