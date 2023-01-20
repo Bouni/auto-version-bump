@@ -12,12 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Bump version
-        run: |
-          # from refs/tags/2023.01.01 get 2023.01.01
-          VERSION=$(echo $GITHUB_REF | sed 's#.*/##')
-          sed -i "s#version=.*#version=\"${VERSION}\",#" "setup.py"
-          cat setup.py
+      - name: Release to TestPyPI
+        if: "github.event.release.prerelease"
+        run: echo "Release to TestPyPI"
+
+      - name: Release to PyPI
+        if: "!github.event.release.prerelease"
+        run: echo "Release to PyPI"
+
+      # - name: Bump version
+      #   run: |
+      #     # from refs/tags/2023.01.01 get 2023.01.01
+      #     VERSION=$(echo $GITHUB_REF | sed 's#.*/##')
+      #     sed -i "s#version=.*#version=\"${VERSION}\",#" "setup.py"
+      #     cat setup.py
 
       # - name: Set up Python 3.9
       #   uses: actions/setup-python@v2
