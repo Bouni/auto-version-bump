@@ -16,7 +16,7 @@ jobs:
       - name: Release to TestPyPI
         run: echo "Release to TestPyPI"
 
-  build-n-publish-to-test-pypi:
+  build-n-publish-to-pypi:
     name: Build and publish Python 🐍 distributions 📦 to PyPI
     if: "!github.event.release.prerelease"
     runs-on: ubuntu-latest
