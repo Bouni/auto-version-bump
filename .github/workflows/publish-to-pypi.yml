@@ -6,18 +6,24 @@ on: # yamllint disable-line rule:truthy
     types: [published]
 
 jobs:
-  build-n-publish:
-    name: Build and publish Python 🐍 distributions 📦 to PyPI and TestPyPI
-    runs-on: ubuntu-18.04
+  build-n-publish-to-test-pypi:
+    name: Build and publish Python 🐍 distributions 📦 to TestPyPI
+    if: "github.event.release.prerelease"
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Release to TestPyPI
-        if: "github.event.release.prerelease"
         run: echo "Release to TestPyPI"
 
+  build-n-publish-to-test-pypi:
+    name: Build and publish Python 🐍 distributions 📦 to PyPI
+    if: "!github.event.release.prerelease"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
       - name: Release to PyPI
-        if: "!github.event.release.prerelease"
         run: echo "Release to PyPI"
 
       # - name: Bump version
